@@ -10,6 +10,8 @@ COPY . .
 
 EXPOSE 80
 
-VOLUME [ "/app/feedback" ]
+# Apparament pas une bonne pratique car pas de bénéfice mais des problèmes (ex. volumes anonymes) 
+# priviligier le paramétrage par lors du lancement (qui est déjà obligatoire btw) 
+# VOLUME [ "/app/feedback" ]
 
 CMD [ "node", "server.js" ]
