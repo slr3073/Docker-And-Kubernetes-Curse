@@ -4,6 +4,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const { log } = require('console');
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.get('/exists', (req, res) => {
 });
 
 app.post('/create', async (req, res) => {
+  console.log("Création d'objectif !"); // modification lorsque le conteneur est déjà lancé
+  
   const title = req.body.title;
   const content = req.body.text;
 

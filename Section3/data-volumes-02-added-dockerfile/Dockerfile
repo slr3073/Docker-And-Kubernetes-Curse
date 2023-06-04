@@ -14,4 +14,4 @@ EXPOSE 80
 # priviligier le paramétrage par lors du lancement (qui est déjà obligatoire btw) 
 # VOLUME [ "/app/feedback" ]
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]
