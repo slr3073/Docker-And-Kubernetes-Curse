@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 80
 
-CMD [ "node", "app.js" ]
+ENV DB_USERNAME=root
+ENV DB_PASSWORD=secret
+
+CMD [ "npm", "start" ]
