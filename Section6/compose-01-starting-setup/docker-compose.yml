@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    # environment:
+    #   MONGO_INIT_ROOT_USERNAME: max
+    #   MONGO_INIT_ROOT_PASSWORD: secret
+    #container_name: mongodb # force ce nom sur le conteneur
+    env_file:
+      - ./env/mongo.env
+    # network fait automatiquement
+  backend:
+    build: ./backend
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    #   args:
+    #     - arg1=ptdr
+    #     - arg2=mdr
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs # Volume nommé
+      - ./backend:/app # Bind mount (plus simple qu'avec Dockerfile)
+      - /app/node_modules # Volume anonyme
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb # backend sera initialisé après mongodb car il dépend de ce service
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true # Pour lancer en mode intératif 
+    tty: true # Pour lancer en mode intératif 
+    depends_on:
+      - backend # backend sera initialisé avant frontend
+
+volumes:
+  data:
+  logs:
