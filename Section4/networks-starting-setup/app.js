@@ -69,7 +69,8 @@ app.get('/people', async (req, res) => {
 
 mongoose.connect(
   //'mongodb://host.docker.internal:27017/swfavorites', //docker special hostname
-  'mongodb://172.17.0.2:27017/swfavorites', // solution basique (ip du conteneur)
+  //'mongodb://172.17.0.2:27017/swfavorites', // solution basique (ip du conteneur)
+  'mongodb://mongodb:27017/swfavorites', // bonne solution (network et nom du conteneur)
   { useNewUrlParser: true },
   (err) => {
     if (err) {
