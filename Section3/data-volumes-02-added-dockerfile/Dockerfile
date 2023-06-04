@@ -8,7 +8,9 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 80
+ENV PORT 80
+
+EXPOSE $PORT
 
 # Apparament pas une bonne pratique car pas de bénéfice mais des problèmes (ex. volumes anonymes) 
 # priviligier le paramétrage par lors du lancement (qui est déjà obligatoire btw) 
